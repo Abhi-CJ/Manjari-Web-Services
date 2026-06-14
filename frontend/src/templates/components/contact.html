@@ -1,0 +1,123 @@
+<section class="section contact" id="contact">
+  <div class="contact-layout">
+    <!-- Left Column: Trust & Value Props -->
+    <div class="contact-trust-column">
+      <h2 class="section-title">Fast, Reliable &amp; Transparent Booking</h2>
+      <p class="section-sub">Experience Gwalior's highest-rated cab service. Get a ride confirmed in under 5 minutes.</p>
+      
+      <div class="trust-features-list">
+        <div class="trust-feature-item">
+          <div class="trust-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          </div>
+          <div class="trust-text">
+            <h4>Instant Confirmation</h4>
+            <p>Direct WhatsApp/SMS confirmation within minutes.</p>
+          </div>
+        </div>
+        
+        <div class="trust-feature-item">
+          <div class="trust-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+          </div>
+          <div class="trust-text">
+            <h4>Flat Fares</h4>
+            <p>No peak hour surges, hidden fees, or driver negotiation.</p>
+          </div>
+        </div>
+        
+        <div class="trust-feature-item">
+          <div class="trust-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 3l1 2 2 1-2 1-1 2-1-2-2-1 2-1z"></path><path d="M6 5l.7 1.3 1.3.7-1.3.7L6 9l-.7-1.3L4 7l1.3-.7z"></path><path d="M12 18l1.5 3 3 1.5-3 1.5L12 27l-1.5-3-3-1.5 3-1.5z"></path></svg>
+          </div>
+          <div class="trust-text">
+            <h4>Sanitized Cars</h4>
+            <p>24/7 serviced AC sedans and SUVs.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="trust-badge">
+        <div class="trust-stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+        </div>
+        <span>Excellent 4.9/5 stars from 850+ local riders</span>
+      </div>
+    </div>
+
+    <!-- Right Column: Form -->
+    <div class="booking-form-wrapper form-card">
+      <h3 class="form-title text-center" style="margin-top: 0; margin-bottom: 2rem;">Request a Ride</h3>
+      <form method="POST" action="{% url 'submit_booking' %}" class="premium-form" id="booking-form">
+        {% csrf_token %}
+
+        <div class="form-grid">
+          <div class="form-group input-with-icon">
+            {{ form.name.label_tag }}
+            <div class="input-wrapper">
+              <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              {{ form.name }}
+            </div>
+            {{ form.name.errors }}
+          </div>
+          
+          <div class="form-group input-with-icon">
+            {{ form.phone.label_tag }}
+            <div class="input-wrapper">
+              <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              {{ form.phone }}
+            </div>
+            {{ form.phone.errors }}
+            <div class="validation-msg" id="phone-validation-msg"></div>
+          </div>
+          
+          <div class="form-group input-with-icon">
+            {{ form.pickup_location.label_tag }}
+            <div class="input-wrapper">
+              <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3"></circle></svg>
+              {{ form.pickup_location }}
+            </div>
+            {{ form.pickup_location.errors }}
+          </div>
+          
+          <div class="form-group input-with-icon">
+            {{ form.drop_location.label_tag }}
+            <div class="input-wrapper">
+              <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              {{ form.drop_location }}
+            </div>
+            {{ form.drop_location.errors }}
+          </div>
+          
+          <div class="form-group full-width input-with-icon">
+            {{ form.service_type.label_tag }}
+            <div class="input-wrapper">
+              <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              {{ form.service_type }}
+            </div>
+            {{ form.service_type.errors }}
+          </div>
+          
+          <div class="form-group full-width input-with-icon">
+            {{ form.message.label_tag }}
+            <div class="input-wrapper align-top">
+              <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+              {{ form.message }}
+            </div>
+            <div class="form-helper" id="service-tip"></div>
+            {{ form.message.errors }}
+          </div>
+        </div>
+
+        <button type="submit" class="btn-submit booking-submit">
+          <span>Confirm Booking</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-arrow"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>

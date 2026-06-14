@@ -1,0 +1,120 @@
+<!-- Reviews Section -->
+<section class="section reviews" id="reviews">
+
+    <div class="section-label">Customer Testimonials</div>
+    <h2 class="section-title">What Our Customers Say</h2>
+
+    <div class="reviews-grid">
+
+        {% for review in reviews %}
+
+        <div class="review-card premium-review-card">
+            <svg class="quote-watermark" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+
+            <div class="stars">
+                {% for i in "12345" %}
+                    {% if forloop.counter <= review.rating %}
+                        <svg class="star-icon filled" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    {% else %}
+                        <svg class="star-icon empty" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <p class="review-text">
+                "{{ review.review }}"
+            </p>
+
+            <div class="review-footer">
+                <div class="reviewer-profile">
+                    <div class="avatar premium-avatar">
+                        {{ review.customer_name|make_list|first|upper }}
+                    </div>
+                    <div class="reviewer-details">
+                        <div class="reviewer-name">{{ review.customer_name }}</div>
+                        <div class="reviewer-loc">{{ review.location }}</div>
+                    </div>
+                </div>
+                <div class="review-date">
+                    {{ review.created_at|date:"d M Y" }}
+                </div>
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="review-card premium-review-card empty-state">
+            <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><line x1="9" y1="10" x2="15" y2="10"></line><line x1="12" y1="7" x2="12" y2="13"></line></svg>
+            <p>No reviews available yet. Be the first to share your experience!</p>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+
+<!-- Review Submission Form -->
+<section class="section review-form" id="review-form">
+  <div class="booking-form-wrapper" style="max-width: 800px; margin: 0 auto;">
+    <h2 class="section-title text-center" style="margin-top: 0;">Leave a Review</h2>
+    <p class="section-sub text-center" style="margin: 0 auto 2.5rem;">Tell us about your experience with Manjari Taxi.</p>
+
+    <form method="POST" action="{% url 'submit_review' %}" class="premium-form" id="review-submit-form">
+      {% csrf_token %}
+      
+      <div class="form-grid">
+        <div class="form-group input-with-icon">
+          {{ review_form.customer_name.label_tag }}
+          <div class="input-wrapper">
+            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            {{ review_form.customer_name }}
+          </div>
+          {{ review_form.customer_name.errors }}
+        </div>
+        
+        <div class="form-group input-with-icon">
+          {{ review_form.location.label_tag }}
+          <div class="input-wrapper">
+            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            {{ review_form.location }}
+          </div>
+          {{ review_form.location.errors }}
+        </div>
+        
+        <div class="form-group full-width">
+          <label>Rating:</label>
+          <div class="star-rating-interactive" id="star-rating-container">
+            <span data-value="1" class="star"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></span>
+            <span data-value="2" class="star"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></span>
+            <span data-value="3" class="star"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></span>
+            <span data-value="4" class="star"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></span>
+            <span data-value="5" class="star"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></span>
+          </div>
+          <!-- Hidden original input -->
+          <div style="display: none;">
+            {{ review_form.rating }}
+          </div>
+          <small class="form-help" id="rating-text">Rate your experience from 1 (Poor) to 5 (Excellent).</small>
+          {{ review_form.rating.errors }}
+        </div>
+        
+        <div class="form-group full-width input-with-icon">
+          {{ review_form.review.label_tag }}
+          <div class="input-wrapper align-top">
+            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            {{ review_form.review }}
+          </div>
+          {{ review_form.review.errors }}
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit booking-submit">
+        <span>Submit Review</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-arrow"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </button>
+    </form>
+  </div>
+</section>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#FFF7F2"/>
+  <rect x="60" y="70" width="1080" height="490" rx="30" fill="#F4600C"/>
+  <rect x="120" y="140" width="360" height="260" rx="20" fill="#FFFFFF" opacity="0.95"/>
+  <path d="M180 330h240" stroke="#F4600C" stroke-width="20" stroke-linecap="round"/>
+  <path d="M245 270h110" stroke="#F4600C" stroke-width="18" stroke-linecap="round"/>
+  <path d="M210 230c18-34 48-52 90-52 36 0 63 13 84 40" stroke="#F4600C" stroke-width="16" fill="none" stroke-linecap="round"/>
+  <text x="560" y="250" fill="#FFFFFF" font-size="54" font-family="Arial, sans-serif" font-weight="700">Manjari Taxi</text>
+  <text x="560" y="320" fill="#FFF0E8" font-size="36" font-family="Arial, sans-serif">Safe, reliable cab service in Gwalior</text>
+  <text x="560" y="380" fill="#FFF0E8" font-size="28" font-family="Arial, sans-serif">Local • Airport • Outstation • Wedding</text>
+</svg>

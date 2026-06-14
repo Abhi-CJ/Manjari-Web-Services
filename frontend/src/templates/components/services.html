@@ -1,0 +1,44 @@
+<section class="section" id="services">
+    <h2 class="sr-only">Our Taxi Services</h2>
+    <div class="text-center">
+        <div class="section-label">What We Offer</div>
+        <h2 class="section-title">Our Taxi Services</h2>
+        <div class="section-sub section-intro">
+            Find the best cab service in Gwalior for every need — local city rides, airport transfer, railway station pickup, wedding car hire, and reliable outstation trips. Our service offers transparent fares, verified drivers, and comfortable vehicles to make travel across Gwalior easy and stress-free.
+        </div>
+    </div>
+
+    <div class="services-grid">
+        {% for service in services %}
+        <div class="service-card {{ service.css_class|default:'generic-card' }}" data-service-type="{{ service.title }}">
+            <div class="service-icon-wrapper">
+                <div class="service-icon">
+                    {% if service.icon_svg %}
+                        {{ service.icon_svg|safe }}
+                    {% else %}
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        </svg>
+                    {% endif %}
+                </div>
+            </div>
+            <h3>{{ service.title }}</h3>
+            <p>{{ service.description }}</p>
+            {% if service.bullet_points %}
+            <ul class="service-bullets">
+                {% for point in service.bullet_points %}
+                <li>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="bullet-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <span>{{ point }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <button class="btn-service-book" onclick="preselectService('{{ service.title|escapejs }}', event)">
+                <span>Book Now</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-arrow"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+        </div>
+        {% endfor %}
+    </div>
+</section>

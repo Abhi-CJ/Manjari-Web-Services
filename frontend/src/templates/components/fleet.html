@@ -1,0 +1,109 @@
+{% load static %}
+
+<section class="fleet" id="fleet">
+    <h2 class="sr-only">Our Fleet</h2>
+    <div class="text-center">
+        <div class="section-label">Premium Vehicles</div>
+        <h2 class="section-title">Explore Our Fleet</h2>
+        <div class="section-sub section-intro">
+            From comfortable hatchbacks for local city rides to spacious SUVs for outstation family trips, all our vehicles are air-conditioned, well-maintained, and regularly sanitized for your safety.
+        </div>
+    </div>
+
+    <div class="fleet-grid">
+
+        {% for vehicle in vehicles %}
+
+        <div class="car-card">
+
+            <div class="car-img">
+                
+                <!-- Responsive picture element with WebP and JPEG fallbacks -->
+                <picture>
+                    <!-- Small viewport (mobile) -->
+                    <source
+                        media="(max-width: 480px)"
+                        srcset="
+                            {{ vehicle.image.url | cut:'.jpg' }}_small.webp 1x,
+                            {{ vehicle.image.url | cut:'.jpg' }}_medium.webp 2x
+                        "
+                        type="image/webp">
+                    <source
+                        media="(max-width: 480px)"
+                        srcset="
+                            {{ vehicle.image.url | cut:'.jpg' }}_small.jpg 1x,
+                            {{ vehicle.image.url | cut:'.jpg' }}_medium.jpg 2x
+                        "
+                        type="image/jpeg">
+                    
+                    <!-- Medium viewport (tablet) -->
+                    <source
+                        media="(max-width: 768px)"
+                        srcset="{{ vehicle.image.url | cut:'.jpg' }}_medium.webp"
+                        type="image/webp">
+                    <source
+                        media="(max-width: 768px)"
+                        srcset="{{ vehicle.image.url | cut:'.jpg' }}_medium.jpg"
+                        type="image/jpeg">
+                    
+                    <!-- Large viewport (desktop) and WebP fallback -->
+                    <source
+                        srcset="{{ vehicle.image.url | cut:'.jpg' }}_large.webp"
+                        type="image/webp">
+                    
+                    <!-- Final JPEG fallback -->
+                    <img
+                        src="{{ vehicle.image.url }}"
+                        alt="{{ vehicle.name }} - {{ vehicle.category }} vehicle"
+                        title="{{ vehicle.name }}"
+                        loading="lazy"
+                        decoding="async"
+                        sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 33vw"
+                        width="600"
+                        height="400">
+                </picture>
+            </div>
+
+            <div class="car-info">
+
+                <div class="car-type">
+                    {{ vehicle.category }}
+                </div>
+
+                <div class="car-name">
+                    {{ vehicle.name }}
+                </div>
+
+                <div class="car-features">
+
+                    <span class="car-tag">
+                        {{ vehicle.seats }} Seats
+                    </span>
+
+                    {% for feature in vehicle.features %}
+                    <span class="car-tag">
+                        {{ feature }}
+                    </span>
+                    {% endfor %}
+
+                </div>
+
+                <a href="#contact" class="btn-book-car">
+                    Book This Car
+                </a>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="car-card">
+            <p>No vehicles available at the moment.</p>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>

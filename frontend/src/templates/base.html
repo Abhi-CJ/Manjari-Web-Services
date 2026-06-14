@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    {% load static %}
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#F4600C">
+    <meta name="description" content="{% block meta_description %}Gwalior taxi service for local transport, airport transfer, railway station cab, outstation trips, wedding car booking, and business travel. Reliable cabs and comfortable cars available 24x7 in Gwalior.{% endblock %}">
+    <meta name="keywords" content="Gwalior cab service, local transport Gwalior, outstation trip, airport transfer, railway station cab, wedding car booking, business trip taxi, car booking, city cab service, Gwalior taxi, best travel service, best travel service in Gwalior, top travel service, best cab service, best cab service in Gwalior">
+    <meta name="robots" content="index, follow">
+
+    <!-- Canonical Tag for SEO -->
+    <link rel="canonical" href="{{ request.build_absolute_uri }}">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Gwalior Taxi Service | Local Transport, Airport Transfer, Wedding Car Booking & Outstation Cabs">
+    <meta property="og:description" content="Gwalior taxi service for local transport, airport transfer, railway station cab, outstation trips, wedding car booking, and business travel. Reliable cabs and comfortable cars available 24x7 in Gwalior.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:image" content="{% static 'images/og-image.png' %}">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Gwalior Taxi Service | Local Transport, Airport Transfer, Wedding Car Booking & Outstation Cabs">
+    <meta name="twitter:description" content="Gwalior taxi service for local transport, airport transfer, railway station cab, outstation trips, wedding car booking, and business travel. Reliable cabs and comfortable cars available 24x7 in Gwalior.">
+    <meta name="twitter:image" content="{% static 'images/og-image.png' %}">
+
+    <title>{% block title %}Gwalior Taxi Service | Local Transport, Airport Transfer, Wedding Car Booking & Outstation Cabs{% endblock %}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Preload the critical stylesheet for faster first paint -->
+    <link rel="preload" href="{% static 'css/style.min.css' %}?v={% now 'U' %}" as="style">
+    <link rel="preload" href="{% static 'js/main.min.js' %}?v={% now 'U' %}" as="script">
+
+    <!-- Main CSS (minified) -->
+    <link rel="stylesheet" href="{% static 'css/style.min.css' %}?v={% now 'U' %}" media="all">
+
+    <!-- Schema.org LocalBusiness Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Manjari Taxi",
+      "description": "Professional taxi service in Gwalior offering local transport, airport transfers, railway station pickups, outstation trips, and wedding car bookings.",
+      "url": "{{ request.build_absolute_uri }}",
+      "telephone": "{{ CONTACT_PHONE }}",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Gwalior",
+        "addressRegion": "Madhya Pradesh",
+        "addressCountry": "IN"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Gwalior"
+      },
+      "priceRange": "₹₹",
+      "image": "{% static 'images/og-image.png' %}",
+      "sameAs": [
+        "https://www.facebook.com/manjari-taxi",
+        "https://www.instagram.com/manjari-taxi"
+      ]
+    }
+    </script>
+
+</head>
+
+<body>
+
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
+    {% include 'components/floating_buttons.html' %}
+
+    {% include 'components/navbar.html' %}
+
+    {% if messages %}
+      <div class="message-wrap">
+        {% for message in messages %}
+          <div class="message message-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <!-- Main content area for accessibility and SEO -->
+    <main id="main-content">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    {% include 'components/footer.html' %}
+
+    <!-- Main JavaScript with defer for non-blocking execution -->
+    <script src="{% static 'js/main.min.js' %}" defer></script>
+
+</body>
+
+</html>

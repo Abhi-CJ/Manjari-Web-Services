@@ -1,0 +1,21 @@
+
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="logo-icon">
+      <svg viewBox="0 0 24 24" role="img" aria-label="Manjari Taxi logo"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v3m-4 12a2 2 0 1 0 4 0 2 2 0 0 0-4 0zm6 0a2 2 0 1 0 4 0 2 2 0 0 0-4 0zM14 17H9M23 11v6h-9V9h6l3 2z"/></svg>
+    </div>
+    Manjari <span>Taxi</span>
+  </a>
+  <ul class="nav-links" id="primary-navigation">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#fleet">Our Fleet</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="tel:{{ CONTACT_PHONE }}" class="nav-cta" aria-label="Call {{ CONTACT_PHONE_DISPLAY }} to book taxi">📞 Book Now</a>
+  <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" onclick="this.classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
