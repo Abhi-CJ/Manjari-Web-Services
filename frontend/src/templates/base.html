@@ -35,11 +35,11 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
 
     <!-- Preload the critical stylesheet for faster first paint -->
-    <link rel="preload" href="{% static 'css/style.min.css' %}?v={% now 'U' %}" as="style">
-    <link rel="preload" href="{% static 'js/main.min.js' %}?v={% now 'U' %}" as="script">
+    <link rel="preload" href="{% static 'css/style.css' %}?v={% now 'U' %}" as="style">
+    <link rel="preload" href="{% static 'js/main.js' %}?v={% now 'U' %}" as="script">
 
-    <!-- Main CSS (minified) -->
-    <link rel="stylesheet" href="{% static 'css/style.min.css' %}?v={% now 'U' %}" media="all">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v={% now 'U' %}" media="all">
 
     <!-- Schema.org LocalBusiness Structured Data for SEO -->
     <script type="application/ld+json">
@@ -97,7 +97,7 @@
     {% include 'components/footer.html' %}
 
     <!-- Main JavaScript with defer for non-blocking execution -->
-    <script src="{% static 'js/main.min.js' %}" defer></script>
+    <script src="{% static 'js/main.js' %}" defer></script>
 
 </body>
 

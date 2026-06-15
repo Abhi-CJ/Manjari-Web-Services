@@ -10,30 +10,38 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
 import sys
 import dj_database_url
 from pathlib import Path
+from decouple import AutoConfig, config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
+PROJECT_ROOT = BASE_DIR
+CONFIG = AutoConfig(search_path=PROJECT_ROOT)
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
-from decouple import config
-
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = CONFIG('SECRET_KEY', default='django-insecure-dev-only-key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=True, cast=bool)
+DEBUG = CONFIG('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = [
+hosts = [
     host.strip()
-    for host in config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
+    for host in CONFIG('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
     if host.strip()
 ]
+
+for host in ['localhost', '127.0.0.1', 'testserver', '0.0.0.0']:
+    if host not in hosts:
+        hosts.append(host)
+
+ALLOWED_HOSTS = hosts
 
 
 # Application definition
@@ -105,10 +113,14 @@ if 'test' in sys.argv:
         }
     }
 else:
+    database_url = CONFIG('DATABASE_URL', default=f"sqlite:///{(BASE_DIR / 'database' / 'db.sqlite3').as_posix()}")
     DATABASES = {
-        "default": dj_database_url.parse(
-            config("DATABASE_URL")
-        )
+        'default': dj_database_url.parse(database_url)
+    }
+
+if DATABASES['default'].get('ENGINE') == 'django.db.backends.postgresql':
+    DATABASES['default']['OPTIONS'] = {
+        'sslmode': 'require',
     }
 
 # Database connection pooling for better performance
@@ -178,6 +190,12 @@ CACHES = {
 # Security Headers
 SECURE_BROWSER_XSS_FILTER = True
 X_FRAME_OPTIONS = 'DENY'
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+    'https://localhost',
+    'https://127.0.0.1',
+]
 
 # HSTS (HTTP Strict Transport Security)
 if not DEBUG:
@@ -187,16 +205,19 @@ if not DEBUG:
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
+else:
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
 
 # Email Configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
+EMAIL_HOST_USER = CONFIG('EMAIL_HOST_USER', default='')
+EMAIL_HOST_PASSWORD = CONFIG('EMAIL_HOST_PASSWORD', default='')
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER or 'info@manjaritaxi.com'
-ADMIN_NOTIFICATION_EMAIL = config('ADMIN_NOTIFICATION_EMAIL', default='karanjhax12@gmail.com')
+ADMIN_NOTIFICATION_EMAIL = CONFIG('ADMIN_NOTIFICATION_EMAIL', default='karanjhax12@gmail.com')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/6.0/ref/settings/#default-auto-field
@@ -204,7 +225,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Global Contact Information
-CONTACT_PHONE = config('CONTACT_PHONE', default='+919399623699')
-CONTACT_PHONE_DISPLAY = config('CONTACT_PHONE_DISPLAY', default='+91 9399623699')
-CONTACT_EMAIL = config('CONTACT_EMAIL', default='info@manjaritaxi.com')
-WHATSAPP_LINK = config('WHATSAPP_LINK', default='https://wa.me/919399623699')
+CONTACT_PHONE = CONFIG('CONTACT_PHONE')
+CONTACT_PHONE_DISPLAY = CONFIG('CONTACT_PHONE_DISPLAY')
+CONTACT_EMAIL = CONFIG('CONTACT_EMAIL')
+WHATSAPP_LINK = CONFIG('WHATSAPP_LINK')
