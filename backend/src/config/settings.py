@@ -195,7 +195,7 @@ CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1:8000',
     'https://localhost',
     'https://127.0.0.1',
-    'manjari-web-services-production-8f3c.up.railway.app',
+    'https://manjari-web-services-production-8f3c.up.railway.app/',
     
 ]
 
