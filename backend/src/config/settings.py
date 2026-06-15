@@ -37,7 +37,7 @@ hosts = [
     if host.strip()
 ]
 
-for host in ['localhost', '127.0.0.1', 'testserver', '0.0.0.0','manjari-web-services-production-8f3c.up.railway.app']:
+for host in ['localhost', '127.0.0.1', 'testserver', '0.0.0.0']:
     if host not in hosts:
         hosts.append(host)
 
@@ -195,6 +195,8 @@ CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1:8000',
     'https://localhost',
     'https://127.0.0.1',
+    'manjari-web-services-production-8f3c.up.railway.app',
+    
 ]
 
 # HSTS (HTTP Strict Transport Security)
