@@ -37,7 +37,7 @@ hosts = [
     if host.strip()
 ]
 
-for host in ['localhost', '127.0.0.1', 'testserver', '0.0.0.0']:
+for host in ['localhost', '127.0.0.1', 'testserver', '0.0.0.0','manjari-web-services-production-8f3c.up.railway.app']:
     if host not in hosts:
         hosts.append(host)
 
