@@ -29,10 +29,9 @@ class CacheHeadersMiddleware:
             patch_response_headers(response, cache_timeout=86400)
             response['Cache-Control'] = 'private, max-age=86400'
         
-        # HTML pages - cache for 1 hour
+        # HTML pages - private cache only (CSRF cookies must not be stripped by CDN)
         elif response.get('Content-Type', '').startswith('text/html'):
-            patch_response_headers(response, cache_timeout=3600)
-            response['Cache-Control'] = 'public, max-age=3600'
+            response['Cache-Control'] = 'private, no-cache'
         
         return response
     

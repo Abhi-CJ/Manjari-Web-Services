@@ -200,6 +200,9 @@ CSRF_TRUSTED_ORIGINS = [
     'https://manjari-web-services.onrender.com',
 ]
 
+# Always set when behind a reverse proxy (Render / Cloudflare)
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 # HSTS (HTTP Strict Transport Security)
 if not DEBUG:
     SECURE_HSTS_SECONDS = 31536000  # 1 year
@@ -207,10 +210,6 @@ if not DEBUG:
     SECURE_HSTS_PRELOAD = True
     SECURE_SSL_REDIRECT = True
 
-    SECURE_PROXY_SSL_HEADER = (
-    'HTTP_X_FORWARDED_PROTO',
-    'https',
-)
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
 else:
