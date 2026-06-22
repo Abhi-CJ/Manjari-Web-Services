@@ -14,7 +14,7 @@ FROM python:3.12-slim
 RUN groupadd -r appuser && useradd -r -g appuser appuser
 
 WORKDIR /app
-ENV PYTHONPATH=/app/src
+ENV PYTHONPATH=/app/backend/src:/app
 
 # Copy installed packages from builder
 COPY --from=builder /install /usr/local
@@ -23,7 +23,7 @@ COPY --from=builder /install /usr/local
 COPY . .
 
 # Collect static files
-RUN python manage.py collectstatic --noinput 2>/dev/null || true
+RUN cd backend && python manage.py collectstatic --noinput 2>/dev/null || true
 
 # Set ownership
 RUN chown -R appuser:appuser /app
