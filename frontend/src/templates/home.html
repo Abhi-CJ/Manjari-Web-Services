@@ -15,10 +15,8 @@
     {% include 'components/services.html' %}
     {% endcache %}
 
-    {% cache 1800 contact_section %}
     <!-- 3. BOOKING FORM — Action: Capture them at peak interest -->
     {% include 'components/contact.html' %}
-    {% endcache %}
 
     {% cache 1800 fleet_section %}
     <!-- 4. FLEET — Desire: Show your premium vehicles -->
@@ -30,9 +28,7 @@
     {% include 'components/why.html' %}
     {% endcache %}
 
-    {% cache 1800 reviews_section %}
     <!-- 6. REVIEWS — Social proof: Final push for skeptics -->
     {% include 'components/reviews.html' %}
-    {% endcache %}
 
 {% endblock %}
