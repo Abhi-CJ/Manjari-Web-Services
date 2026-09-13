@@ -33,7 +33,7 @@ DEBUG = CONFIG('DEBUG', default=True, cast=bool)
 
 hosts = [
     host.strip()
-    for host in CONFIG('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
+    for host in CONFIG('ALLOWED_HOSTS', default='https://manjari-web-services-s4z9.onrender.com').split(',')
     if host.strip()
 ]
 

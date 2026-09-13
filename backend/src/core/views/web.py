@@ -3,11 +3,13 @@ import json
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpRequest, HttpResponse
 from django.views.decorators.cache import cache_page
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 from core.models import Service, Vehicle, Review, RoutePage
 from bookings.forms import BookingForm
 from core.forms import ReviewForm
 
+@ensure_csrf_cookie
 def home(request: HttpRequest) -> HttpResponse:
     """
     Home page view displaying services, fleet, approved reviews, and forms.
@@ -40,6 +42,7 @@ def home(request: HttpRequest) -> HttpResponse:
     return render(request, "home.html", context)
 
 
+@ensure_csrf_cookie
 def route_page(request: HttpRequest, slug: str) -> HttpResponse:
     """
     Dedicated SEO landing page for a specific route or service.
